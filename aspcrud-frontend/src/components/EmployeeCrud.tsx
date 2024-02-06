@@ -2,6 +2,7 @@ import axios from "axios";
 import { Fragment, useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
 import Form from "react-bootstrap/Form";
+import FloatingLabel from "react-bootstrap/FloatingLabel";
 
 function EmployeeCrud() {
   const empInfoHeader = [
@@ -111,21 +112,31 @@ function EmployeeCrud() {
 
   return (
     <Fragment>
-      <Form className="container mt-4">
+      <Form
+        className="container mt-4"
+        style={{
+          border: "2px solid",
+          borderRadius: "12px",
+          borderColor: "whitesmoke",
+        }}
+      >
         <Form.Group className="mb-3" controlId="inputEmpId">
-          <Form.Label>Employee ID</Form.Label>
+          <Form.Label hidden>Employee ID</Form.Label>
           <Form.Control
             type="text"
-            placeholder="Employee Id"
             hidden
+            placeholder="Employee Id"
             value={EmpId}
             onChange={(event) => {
               setId(event.target.value);
             }}
           />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="inputFirstName">
-          <Form.Label>First Name</Form.Label>
+        <FloatingLabel
+          className="mb-3"
+          controlId="inputFirstName"
+          label="First Name"
+        >
           <Form.Control
             type="text"
             placeholder="First Name"
@@ -134,9 +145,12 @@ function EmployeeCrud() {
               setFirstName(event.target.value);
             }}
           />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="inputLastName">
-          <Form.Label>Last Name</Form.Label>
+        </FloatingLabel>
+        <FloatingLabel
+          className="mb-3"
+          controlId="inputLastName"
+          label="Last Name"
+        >
           <Form.Control
             type="text"
             placeholder="Last Name"
@@ -145,9 +159,8 @@ function EmployeeCrud() {
               setLastName(event.target.value);
             }}
           />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="inputEmail">
-          <Form.Label>E-mail</Form.Label>
+        </FloatingLabel>
+        <FloatingLabel className="mb-3" controlId="inputEmail" label="E-mail">
           <Form.Control
             type="email"
             placeholder="E-mail"
@@ -156,9 +169,8 @@ function EmployeeCrud() {
               setEmail(event.target.value);
             }}
           />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="inputPhone">
-          <Form.Label>Phone</Form.Label>
+        </FloatingLabel>
+        <FloatingLabel className="mb-3" controlId="inputPhone" label="Phone">
           <Form.Control
             type="text"
             placeholder="Phone"
@@ -168,20 +180,43 @@ function EmployeeCrud() {
             }}
           />
           <div>
-            <button className="btn btn-primary mt-4" onClick={save}>
+            <button
+              className="btn btn-primary mt-4"
+              style={{ padding: "10px" }}
+              onClick={save}
+            >
               Register
             </button>
-            <button className="btn btn-warning mt-4" onClick={update}>
+            <button
+              className="btn btn-warning mt-4"
+              style={{
+                padding: "10px",
+                marginTop: "20px",
+                marginLeft: "20px",
+              }}
+              onClick={update}
+            >
               Update
             </button>
           </div>
-        </Form.Group>
+        </FloatingLabel>
       </Form>
 
       <br></br>
-      <Table responsive="sm" className="table table-dark">
+
+      <Table
+        responsive="sm"
+        className="table table-dark"
+        style={{
+          width: "90%",
+          border: "2px solid",
+          borderRadius: "12px",
+          borderColor: "whitesmoke",
+          margin: "auto",
+        }}
+      >
         <thead>
-          <tr align-items="center">
+          <tr style={{ textAlign: "center" }}>
             {empInfoHeader.map((header) => (
               <th key={header}>{header}</th>
             ))}
@@ -190,7 +225,7 @@ function EmployeeCrud() {
 
         <tbody>
           {employees.map((employee) => (
-            <tr key={employee["empId"]} align-items="center">
+            <tr style={{ textAlign: "center" }} key={employee["empId"]}>
               <td>{employee["empId"]}</td>
               <td>{employee["firstName"]}</td>
               <td>{employee["lastName"]}</td>
@@ -207,6 +242,9 @@ function EmployeeCrud() {
                 <button
                   type="button"
                   className="btn btn-danger"
+                  style={{
+                    marginLeft: "5px",
+                  }}
                   onClick={() => DeleteEmployee(employee["empId"])}
                 >
                   Delete
